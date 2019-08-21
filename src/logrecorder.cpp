@@ -2,11 +2,11 @@
 #include "src/logger.h"
 #include "src/loggercreator.h"
 
-QThread* LogRecorder::_thred = new QThread;
 
 LogRecorder::LogRecorder(QString file, QObject *parent) : QObject(parent)
   ,_doWork(true)
   ,_filePos(file)
+  ,_thred(new QThread)
 {
 
     openFile();
@@ -21,11 +21,13 @@ LogRecorder::LogRecorder(QString file, QObject *parent) : QObject(parent)
 
 LogRecorder::~LogRecorder()
 {
-
     _doWork = false;
     _thred->wait();
     _strem->flush();
     if(_outFile.isOpen()) _outFile.close();
+
+    delete _strem;
+    delete _thred;
 }
 
 void LogRecorder::openFile()
@@ -57,8 +59,6 @@ void LogRecorder::runWork()
                 *_strem << pom;
         }
         _mutex.unlock();
-
-        _OK()<<"Go sleep";
         _strem->flush();
         QThread::sleep(10);
     }

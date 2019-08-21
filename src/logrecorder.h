@@ -27,7 +27,7 @@ private:
 
     bool _doWork;
     QString _filePos;
-    static QThread* _thred;
+    QThread* _thred;
     QQueue<QString> _qMess;
     QFile _outFile;
     QTextStream* _strem;
