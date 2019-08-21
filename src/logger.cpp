@@ -28,26 +28,20 @@ void Logger::setLog(const LogMessage item)
 {
 
     QString pom;
+    QString thredName;
 
-    pom += QString("<")
-        + item._dateTime.toString(EXP_DATETIMEFORMAT)
-        + ">"
-        + " "
-        + getHeder(item._category)
-        + item._text
-        + "\n" ;
+    if(_thredName) {
+        thredName = QThread::currentThread()->objectName() + " ";
+    }
+
+    pom += QString("<%1> ").arg(item._dateTime.toString(EXP_DATETIMEFORMAT));
+    pom += thredName;
+    pom += getHeder(item._category);
+    pom += item._text;
+    pom +="\n" ;
 
     if(_printConsol) {
-
-        if(_thredName) {
-
-            QString name = QThread::currentThread()->objectName() ;
-            pom = name + " " + pom;
-
-        }
-
         std::cout<<pom.toStdString()<<std::flush;
-
     }
 
     _record->setData(pom);
