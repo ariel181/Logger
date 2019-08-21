@@ -31,7 +31,8 @@ public:
     }
 
 private:
-    QString getHeder(const Category cat);
+    QString getHeder(const Category cat) const;
+    const QString genLogText(const LogMessage item) const;
     static LogRecorder* _record;
     bool _printConsol;
     bool _makSpace;

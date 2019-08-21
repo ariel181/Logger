@@ -27,18 +27,7 @@ Logger::~Logger()
 void Logger::setLog(const LogMessage item)
 {
 
-    QString pom;
-    QString thredName;
-
-    if(_thredName) {
-        thredName = QThread::currentThread()->objectName() + " ";
-    }
-
-    pom += QString("<%1> ").arg(item._dateTime.toString(EXP_DATETIMEFORMAT));
-    pom += thredName;
-    pom += getHeder(item._category);
-    pom += item._text;
-    pom +="\n" ;
+    const QString pom = genLogText(item);
 
     if(_printConsol) {
         std::cout<<pom.toStdString()<<std::flush;
@@ -68,7 +57,7 @@ Logger &Logger::operator <<(const QString t)
 }
 
 //TODO zrobienie osobnej klasy do formatowania
-QString Logger::getHeder(const Category cat)
+QString Logger::getHeder(const Category cat) const
 {
     switch (cat) {
     case Category::OK:
@@ -90,6 +79,25 @@ QString Logger::getHeder(const Category cat)
         return "NULL";
         break;
     }
+}
+
+const QString Logger::genLogText(const LogMessage item) const
+{
+
+    QString pom;
+    QString thredName;
+
+    if(_thredName) {
+        thredName = QString("<%1> ").arg(QThread::currentThread()->objectName());
+    }
+
+    pom += QString("<%1> ").arg(item._dateTime.toString(EXP_DATETIMEFORMAT));
+    pom += thredName;
+    pom += getHeder(item._category);
+    pom += item._text;
+    pom +="\n" ;
+
+    return pom;
 }
 
 
