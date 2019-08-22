@@ -5,7 +5,7 @@
 #include "src/logrecorder.h"
 #include "src/macro.h"
 
-#define FILE_NAME "./log.text"
+#define FILE_NAME "./log.txt"
 
 LogRecorder* Logger::_record = new LogRecorder(FILE_NAME);
 
