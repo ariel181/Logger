@@ -9,7 +9,7 @@
 #include <QTextStream>
 #include <QThread>
 #include <QDateTime>
-#include "src/logmessage.h"
+#include "logmessage.h"
 
 class LogRecorder;
 
@@ -25,13 +25,14 @@ public:
     void setLog(const LogMessage item);
     Logger &mabyspace();
     Logger &operator <<(const QString t );
-    Logger &operator <<(const char* t ){
-        _content._text += QString::fromUtf8(t);
-        return mabyspace();
-    }
+    Logger &operator <<(const char* t );
+    Logger &operator <<(const int t );
+    Logger &operator <<(const QPoint t );
+    Logger &operator <<(const QPointF t );
+    Logger &operator <<(const QRectF t );
 
 private:
-    QString getHeder(const Category cat) const;
+    QString getHeder(const LogMessage cat) const;
     const QString genLogText(const LogMessage item) const;
     static LogRecorder* _record;
     bool _printConsol;

@@ -2,8 +2,11 @@
 #include <iostream>
 #include <QDateTime>
 #include <QStringList>
-#include "src/logrecorder.h"
-#include "src/macro.h"
+#include <QPoint>
+#include <QPointF>
+#include <QRectF>
+#include "logrecorder.h"
+#include "macro.h"
 
 #define FILE_NAME "./log.txt"
 
@@ -47,6 +50,39 @@ Logger &Logger::mabyspace()
 
 }
 
+Logger &Logger::operator <<(const char *t){
+    _content._text += QString::fromUtf8(t);
+    return mabyspace();
+}
+
+Logger &Logger::operator <<(const QRectF t)
+{
+    _content._text += QString("(x:%1 y:%2 h:%3 w:%4)")
+            .arg(t.x())
+            .arg(t.y())
+            .arg(t.height())
+            .arg(t.width());
+}
+
+Logger &Logger::operator <<(const QPointF t)
+{
+    _content._text += QString("(%1,%2)").arg(t.x()).arg(t.y());
+    return mabyspace();
+}
+
+Logger &Logger::operator <<(const QPoint t)
+{
+    _content._text += QString("(%1,%2)").arg(t.x()).arg(t.y());
+    return mabyspace();
+}
+
+Logger &Logger::operator <<(const int t)
+{
+    _content._text += QString::number(t);
+    return mabyspace();
+
+}
+
 Logger &Logger::operator <<(const QString t)
 {
 
@@ -57,14 +93,14 @@ Logger &Logger::operator <<(const QString t)
 }
 
 //TODO zrobienie osobnej klasy do formatowania
-QString Logger::getHeder(const Category cat) const
+QString Logger::getHeder(const LogMessage cat) const
 {
-    switch (cat) {
+    switch (cat._category) {
     case Category::OK:
         return "OK:\t";
         break;
     case Category::DEBUG:
-        return "Debug:\t";
+        return "Debug:\t" + cat._method + " " ;
         break;
     case Category::ERROR:
         return "Error:\t";
@@ -93,7 +129,7 @@ const QString Logger::genLogText(const LogMessage item) const
 
     pom += QString("<%1> ").arg(item._dateTime.toString(EXP_DATETIMEFORMAT));
     pom += thredName;
-    pom += getHeder(item._category);
+    pom += getHeder(item);
     pom += item._text;
     pom +="\n" ;
 

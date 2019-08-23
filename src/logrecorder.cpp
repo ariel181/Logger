@@ -1,6 +1,6 @@
-#include "src/logrecorder.h"
-#include "src/logger.h"
-#include "src/loggercreator.h"
+#include "logrecorder.h"
+#include "logger.h"
+#include "loggercreator.h"
 
 
 LogRecorder::LogRecorder(QString file, QObject *parent) : QObject(parent)

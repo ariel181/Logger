@@ -1,7 +1,7 @@
 #ifndef LOGGERCREATOR_H
 #define LOGGERCREATOR_H
 
-#include "src/logger.h"
+#include "logger.h"
 
 
 class LoggerCreator {
