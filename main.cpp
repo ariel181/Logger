@@ -9,11 +9,11 @@ int main(int argc, char *argv[])
 
     QThread::currentThread()->setObjectName("Main Thread");
 
-    _USER()<<"log User";
-    _OK()<<"log Ok";
-    _DEBUG()<<"log debug";
-    _INFO ()<<"log info" ;
-    _ERROR()<<"log error";
+    _USER() 	<<	"log User";
+    _OK()		<<	"log Ok";
+    _DEBUG()	<<	"log debug";
+    _INFO ()	<<	"log info" ;
+    _ERROR()	<<	"log error";
 
     _INFO()<<QPoint(100,50);
     _INFO()<<QRectF(0,0,100.5,60.89);

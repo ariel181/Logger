@@ -6,38 +6,19 @@
 #include <QPointF>
 #include <QRectF>
 #include "logrecorder.h"
-#include "macro.h"
-
-#define FILE_NAME "./log.txt"
-
-LogRecorder* Logger::_record = new LogRecorder(FILE_NAME);
+#include "loggermennager.h"
 
 
-Logger::Logger(LogMessage content) :
-   _printConsol(true)
-  ,_makSpace(true)
- ,_thredName(true)
-  ,_content(content)
+Logger::Logger(LogMessage content, LoggerMennager &menager) :
+  _content{content}
+    ,_menager{menager}
 {
 
 }
 
 Logger::~Logger()
 {
-    setLog(_content);
-}
-
-void Logger::setLog(const LogMessage item)
-{
-
-    const QString pom = genLogText(item);
-
-    if(_printConsol) {
-        std::cout<<pom.toStdString()<<std::flush;
-    }
-
-    _record->setData(pom);
-
+    _menager.setLog(_content);
 }
 
 Logger &Logger::mabyspace()
@@ -91,49 +72,3 @@ Logger &Logger::operator <<(const QString t)
     return mabyspace();
 
 }
-
-//TODO zrobienie osobnej klasy do formatowania
-QString Logger::getHeder(const LogMessage cat) const
-{
-    switch (cat._category) {
-    case Category::OK:
-        return "OK:\t";
-        break;
-    case Category::DEBUG:
-        return "Debug:\t" + cat._method + " " ;
-        break;
-    case Category::ERROR:
-        return "Error:\t";
-        break;
-    case Category::INFO:
-        return "Info:\t";
-        break;
-    case Category::USER:
-        return "User:\t";
-        break;
-    default:
-        return "NULL";
-        break;
-    }
-}
-
-const QString Logger::genLogText(const LogMessage item) const
-{
-
-    QString pom;
-    QString thredName;
-
-    if(_thredName) {
-        thredName = QString("<%1> ").arg(QThread::currentThread()->objectName());
-    }
-
-    pom += QString("<%1> ").arg(item._dateTime.toString(EXP_DATETIMEFORMAT));
-    pom += thredName;
-    pom += getHeder(item);
-    pom += item._text;
-    pom +="\n" ;
-
-    return pom;
-}
-
-

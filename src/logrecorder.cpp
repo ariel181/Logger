@@ -11,7 +11,6 @@ LogRecorder::LogRecorder(QString file, QObject *parent) : QObject(parent)
 
     openFile();
     _thred->setParent(this);
-//    _thred = new QThread(this);
     _thred->setObjectName("Log Thread");
     connect(_thred,&QThread::started,this,&LogRecorder::runWork);
     this->moveToThread(_thred);

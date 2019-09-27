@@ -1,4 +1,5 @@
 #include "loggercreator.h"
+#include "loggermennager.h"
 
 LoggerCreator::LoggerCreator(int line, const char *file, const char *method, Category cat):
     content(line,file,method,cat)
@@ -9,7 +10,7 @@ LoggerCreator::LoggerCreator(int line, const char *file, const char *method, Cat
 Logger LoggerCreator::logger() const
 {
 
-    Logger logger(content);
+    Logger logger(content,gLogMenager());
 
     return logger;
 

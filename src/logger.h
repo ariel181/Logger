@@ -12,17 +12,14 @@
 #include "logmessage.h"
 
 class LogRecorder;
-
-
-
+class LoggerMennager;
 
 class Logger
 {
 
 public:
-    Logger(LogMessage content);
+    Logger(LogMessage content, LoggerMennager &menager );
     ~Logger();
-    void setLog(const LogMessage item);
     Logger &mabyspace();
     Logger &operator <<(const QString t );
     Logger &operator <<(const char* t );
@@ -32,13 +29,9 @@ public:
     Logger &operator <<(const QRectF t );
 
 private:
-    QString getHeder(const LogMessage cat) const;
-    const QString genLogText(const LogMessage item) const;
-    static LogRecorder* _record;
-    bool _printConsol;
-    bool _makSpace;
-    bool _thredName;
     LogMessage _content;
+    LoggerMennager& _menager;
+    bool _makSpace{true};
 
 };
 

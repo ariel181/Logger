@@ -3,6 +3,8 @@
 
 #include <QString>
 #include <QDateTime>
+#include <QThread>
+
 
 enum class Category {
     NON = -1,
@@ -19,13 +21,18 @@ class LogMessage {
 public:
 
     LogMessage(int line, QString file, QString method, Category cat):
-            _category(cat)
-          ,_line(line)
-          ,_file(file)
-          ,_method(method)
-          ,_text("")
-          ,_dateTime(QDateTime::currentDateTime())
-    {}
+           _category{cat}
+          ,_line{line}
+          ,_file{file}
+          ,_method{method}
+          ,_text{""}
+         ,_threadName{""}
+          ,_dateTime{QDateTime::currentDateTime()}
+    {
+
+        _threadName = QString("<%1> ").arg(QThread::currentThread()->objectName());
+
+    }
 
 private:
     Category _category;
@@ -33,9 +40,11 @@ private:
     QString _file;
     QString _method;
     QString _text;
+    QString _threadName;
     QDateTime _dateTime;
 
     friend class Logger;
+    friend class LogHelper;
 };
 
 #endif // LOGMESSAGE_H
