@@ -1,6 +1,7 @@
 #include "logrecorder.h"
 #include "logger.h"
 #include "loggercreator.h"
+#include <QDebug>
 
 
 LogRecorder::LogRecorder(QString file, QObject *parent) : QObject(parent)
@@ -9,6 +10,7 @@ LogRecorder::LogRecorder(QString file, QObject *parent) : QObject(parent)
   ,_thred(new QThread)
 {
 
+        qDebug()<<Q_FUNC_INFO;
     openFile();
     _thred->setParent(this);
     _thred->setObjectName("Log Thread");

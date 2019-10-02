@@ -2,7 +2,9 @@
 #define LOGGERMENNAGER_H
 
 #include "logmessage.h"
+#include "logrecorder.h"
 #include <memory>
+#include <QDebug>
 
 class LogRecorder;
 
@@ -10,6 +12,7 @@ class LoggerMennager
 {
 public:
     static LoggerMennager& getInstancea() {
+        qDebug()<<Q_FUNC_INFO;
         static LoggerMennager logmen;
         return logmen;
     }

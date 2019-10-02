@@ -43,6 +43,7 @@ Logger &Logger::operator <<(const QRectF t)
             .arg(t.y())
             .arg(t.height())
             .arg(t.width());
+    return mabyspace();
 }
 
 Logger &Logger::operator <<(const QPointF t)

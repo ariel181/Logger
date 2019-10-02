@@ -8,11 +8,13 @@
 
 LoggerMennager::LoggerMennager()
 {
+        qDebug()<<Q_FUNC_INFO;
     _record.reset(new LogRecorder(gLogConfig().filePath()));
 }
 
 void LoggerMennager::setLog(const LogMessage item)
 {
+        qDebug()<<Q_FUNC_INFO;
     const QString pom = LogHelper::genSimpleText(item);
 
     if(gLogConfig().printConsol()) {
