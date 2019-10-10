@@ -9,12 +9,12 @@ Program posiada swój własny watek zapisu do pliku, które odbywa się przy ods
 
 ## Funkcjonalności
 
-[X] Rejestracja zdarzeń w wielowątkowości
-[X] Domyślna ścieżka zapisu do pliku
-[ ] Ustawienie własnej ścieżki zapisu
-[X] Komunikaty zdarzeń w konsoli
-[ ] Włączenie/wyłączanie podczas pracy programu komunikatów konsolowych
-[X] Identyfikacji typu zdarzenia
-[ ] Możliwość podpięcia własnych odbiorców komunikatów
-[ ] Identyfikacja wądków w jakich zdarzenie wystąpiło
-[X] Data i godzina zdarzenia.
+- [X] Rejestracja zdarzeń w wielowątkowości
+- [X] Domyślna ścieżka zapisu do pliku
+- [ ] Ustawienie własnej ścieżki zapisu
+- [X] Komunikaty zdarzeń w konsoli
+- [ ] Włączenie/wyłączanie podczas pracy programu komunikatów konsolowych
+- [X] Identyfikacji typu zdarzenia
+- [ ] Możliwość podpięcia własnych odbiorców komunikatów
+- [ ] Identyfikacja wądków w jakich zdarzenie wystąpiło
+- [X] Data i godzina zdarzenia.
